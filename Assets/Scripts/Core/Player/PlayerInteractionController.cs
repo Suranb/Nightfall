@@ -4,9 +4,11 @@ public class PlayerInteractionController : MonoBehaviour
 {
   public Transform player;
   public float interactionRange = 2.0f;
+  public PlayerInventory PlayerInventory;
 
   void Start()
   {
+    PlayerInventory = GetComponent<PlayerInventory>();
   }
 
   void Update()
@@ -30,8 +32,16 @@ public class PlayerInteractionController : MonoBehaviour
 
   void InteractWithObject(GameObject obj)
   {
-    // Interaction logic here
-    Debug.Log("Interacting with " + obj.name);
+    if (obj == null) return;
+
+    Item item = obj.GetComponent<Item>();
+
+    if (item != null && item.item != null && item.item.isInteractable)
+    {
+      Debug.Log("Adding GameItem to Inventory: " + item.name);
+      PlayerInventory.AddItem(item.item);
+      Destroy(obj);
+    }
   }
 
   GameObject PerformRaycast()

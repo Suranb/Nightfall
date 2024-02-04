@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 174854602}
   - component: {fileID: 174854601}
   - component: {fileID: 174854600}
-  - component: {fileID: 174854604}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -230,24 +229,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &174854604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174854599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa071b22d7e5b04682e67ccdf2f45a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemName: New Item
-  icon: {fileID: 0}
-  isDestructible: 0
-  isInteractable: 1
-  interactionSound: {fileID: 0}
-  destructionEffect: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,15 +920,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1029290144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa071b22d7e5b04682e67ccdf2f45a4, type: 3}
+  m_Script: {fileID: 11500000, guid: d5e215ea4da5c7a44b4a461747a26545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemName: Sword
-  icon: {fileID: 0}
-  isDestructible: 0
-  isInteractable: 1
-  interactionSound: {fileID: 0}
-  destructionEffect: {fileID: 0}
+  item: {fileID: 11400000, guid: 5e90d584bbcbe1d418b53a719c797f84, type: 2}
 --- !u!1 &1054206162 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8876984925979741903, guid: 6c1caa84a7c85ae4885bd76a5b5120cc,
@@ -989,6 +965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 584395250}
   interactionRange: 3
+  PlayerInventory: {fileID: 0}
 --- !u!114 &1054206169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,7 +1070,6 @@ GameObject:
   - component: {fileID: 1357693115}
   - component: {fileID: 1357693114}
   - component: {fileID: 1357693113}
-  - component: {fileID: 1357693117}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -1188,24 +1164,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1357693117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1357693112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa071b22d7e5b04682e67ccdf2f45a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemName: New Item
-  icon: {fileID: 0}
-  isDestructible: 0
-  isInteractable: 1
-  interactionSound: {fileID: 0}
-  destructionEffect: {fileID: 0}
 --- !u!1 &1431794851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,9 +1260,7 @@ GameObject:
   - component: {fileID: 1553095810}
   - component: {fileID: 1553095809}
   - component: {fileID: 1553095808}
-  - component: {fileID: 1553095812}
   - component: {fileID: 1553095813}
-  - component: {fileID: 1553095814}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1398,24 +1354,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1553095812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553095807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa071b22d7e5b04682e67ccdf2f45a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemName: New Item
-  icon: {fileID: 0}
-  isDestructible: 0
-  isInteractable: 1
-  interactionSound: {fileID: 0}
-  destructionEffect: {fileID: 0}
 --- !u!114 &1553095813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1426,18 +1364,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4385ee5a6650b246a1cffe73447d326, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1553095814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553095807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0beca14c848044a47a7ce62fbbdc47f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
