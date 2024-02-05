@@ -25,15 +25,17 @@ public class OutlineController : MonoBehaviour
         ApplyOutline(_lastOutlined, false);
       }
 
-      if (currentObject != null && currentObject.GetComponent<GameItem>() != null && currentObject.GetComponent<GameItem>().isInteractable)
+      if (currentObject != null)
       {
-        ApplyOutline(currentObject, true);
-        _lastOutlined = currentObject;
+        Item item = currentObject.GetComponent<Item>();
+        if (item != null && item.item != null && item.item.isInteractable)
+        {
+          ApplyOutline(currentObject, true);
+          _lastOutlined = currentObject;
+          return;
+        }
       }
-      else
-      {
-        _lastOutlined = null;
-      }
+      _lastOutlined = null;
     }
   }
 
