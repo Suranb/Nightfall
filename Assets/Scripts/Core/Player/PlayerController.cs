@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
   [SerializeField] private float _moveSpeed = 10.0f;
-  [SerializeField] private float _rotationSpeed = 5.0f; // Rotation speed
+  [SerializeField] private float _rotationSpeed = 2.0f;
   private Rigidbody _playerRigidbody;
   private Camera _mainCamera;
   private Animator _animator;
@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
 
     Vector3 movementInput = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
     Vector3 movement = transform.forward * movementInput.z * _moveSpeed + transform.right * movementInput.x * _moveSpeed;
-
     _playerRigidbody.velocity = new Vector3(movement.x, _playerRigidbody.velocity.y, movement.z);
   }
 
@@ -48,16 +47,12 @@ public class PlayerController : MonoBehaviour
       transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
     }
   }
-
   private void UpdateAnimation()
   {
-    if (_playerRigidbody.velocity.magnitude > 0)
-    {
-      _animator.SetBool("IsRunning", true);
-    }
-    else
-    {
-      _animator.SetBool("IsRunning", false);
-    }
+    float moveVertical = Input.GetAxisRaw("Vertical");
+    bool isMoving = _playerRigidbody.velocity.magnitude > 0;
+
+    _animator.SetBool("IsRunning", isMoving && moveVertical > 0);
+    _animator.SetBool("IsRunningBackward", isMoving && moveVertical < 0);
   }
 }
