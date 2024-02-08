@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
   [SerializeField] private float _moveSpeed = 10.0f;
-  [SerializeField] private float _rotationSpeed = 2.0f;
+  [SerializeField] private float _rotationSpeed = 5.0f;
   private Rigidbody _playerRigidbody;
   private Camera _mainCamera;
   private Animator _animator;
@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
     HandleMovement();
     HandleRotation();
     UpdateAnimation();
+    HandleAttack();
+  }
+  private void HandleAttack()
+  {
+    _animator.SetBool("IsAttacking", Input.GetMouseButton(0));
   }
 
   private void HandleMovement()
@@ -50,9 +55,15 @@ public class PlayerController : MonoBehaviour
   private void UpdateAnimation()
   {
     float moveVertical = Input.GetAxisRaw("Vertical");
+    float moveHorizontal = Input.GetAxisRaw("Horizontal");
+
     bool isMoving = _playerRigidbody.velocity.magnitude > 0;
+    bool isStrafingLeft = moveHorizontal < 0;
+    bool isStrafingRight = moveHorizontal > 0;
 
     _animator.SetBool("IsRunning", isMoving && moveVertical > 0);
     _animator.SetBool("IsRunningBackward", isMoving && moveVertical < 0);
+    _animator.SetBool("IsStrafingLeft", isStrafingLeft);
+    _animator.SetBool("IsStrafingRight", isStrafingRight);
   }
 }

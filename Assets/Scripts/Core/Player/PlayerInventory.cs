@@ -23,5 +23,6 @@ public class PlayerInventory : MonoBehaviour
     }
   }
 
-  // Additional methods like DisplayInventory, CheckForItem, etc., can be added here.
+  // DisplayInventory,
+  // CheckForItem
 }
