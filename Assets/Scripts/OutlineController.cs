@@ -28,7 +28,7 @@ public class OutlineController : MonoBehaviour
       if (currentObject != null)
       {
         Item item = currentObject.GetComponent<Item>();
-        if (item != null && item.item != null && item.item.isInteractable)
+        if (item != null && item.item != null)
         {
           ApplyOutline(currentObject, true);
           _lastOutlined = currentObject;

@@ -15,6 +15,6 @@ MonoBehaviour:
   ItemName: Sword
   icon: {fileID: 0}
   isDestructible: 0
-  isInteractable: 1
+  isInteractable: 0
   interactionSound: {fileID: 0}
   destructionEffect: {fileID: 0}

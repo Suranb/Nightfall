@@ -4,16 +4,16 @@ public class PlayerInteractionController : MonoBehaviour
 {
   public Transform player;
   public float interactionRange = 2.0f;
-  public PlayerInventory PlayerInventory;
+  [SerializeField] private PlayerInventory _playerInventory;
 
   void Start()
   {
-    PlayerInventory = GetComponent<PlayerInventory>();
+    _playerInventory = GetComponent<PlayerInventory>();
   }
 
   void Update()
   {
-    if (Input.GetMouseButtonDown(0)) // Left mouse button clicked
+    if (Input.GetMouseButtonDown(0))
     {
       GameObject hitObject = PerformRaycast();
       if (hitObject != null) { Debug.Log($"HitObject: {hitObject.name}"); }
@@ -34,13 +34,15 @@ public class PlayerInteractionController : MonoBehaviour
   {
     if (obj == null) return;
 
-    Item item = obj.GetComponent<Item>();
+    var interactable = obj.GetComponent<IInteractable>();
 
-    if (item != null && item.item != null && item.item.isInteractable)
+    if (interactable != null)
     {
-      Debug.Log("Adding GameItem to Inventory: " + item.name);
-      PlayerInventory.AddItem(item.item);
-      Destroy(obj);
+      interactable.Interact(_playerInventory);
+    }
+    else
+    {
+      Debug.Log($"{obj.name} is not interactable.");
     }
   }
 
