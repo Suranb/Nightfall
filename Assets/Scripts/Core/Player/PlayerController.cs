@@ -1,9 +1,11 @@
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
   [SerializeField] private float _moveSpeed = 10.0f;
   [SerializeField] private float _rotationSpeed = 5.0f;
+
   private Rigidbody _playerRigidbody;
   private Camera _mainCamera;
   private Animator _animator;
@@ -21,15 +23,19 @@ public class PlayerController : MonoBehaviour
     HandleMovement();
     HandleRotation();
     UpdateAnimation();
-    HandleMeleAttack();
+    HandleAttack();
   }
-  private void HandleMeleAttack()
+  private void HandleAttack()
   {
-    if (_playerInventory.isCurrentlyEquippedMeleWeapon)
+    if (Input.GetMouseButton(0) && _playerInventory.currentEquippedWeapon != null)
     {
-      _animator.SetBool("IsAttacking", Input.GetMouseButton(0));
+      if (_playerInventory.currentEquippedWeapon.CanAttack())
+      {
+        _playerInventory.currentEquippedWeapon.Attack(_animator);
+      }
     }
   }
+
 
   private void HandleMovement()
   {

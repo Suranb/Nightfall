@@ -1,8 +1,12 @@
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-public class Sword : Item, IInteractable
+public class Sword : Item, IWeapon
 {
   [SerializeField] private int Damage = 10;
+  [SerializeField] private float attackDelay = 0.5f;
+  [SerializeField] private float lastEquipTime;
+
 
   public void Interact(PlayerInventory playerInventory)
   {
@@ -10,13 +14,17 @@ public class Sword : Item, IInteractable
     {
       playerInventory.AddItem(item);
 
-      if (!playerInventory.isCurrentlyEquippedMeleWeapon)
+      if (!playerInventory.isCurrentlyEquippedWeapon)
       {
         EquipWeapon(playerInventory);
         return;
       }
       Destroy(gameObject);
     }
+  }
+  public bool CanAttack()
+  {
+    return Time.time > lastEquipTime + attackDelay;
   }
 
   public void EquipWeapon(PlayerInventory playerInventory)
@@ -26,7 +34,13 @@ public class Sword : Item, IInteractable
     {
       transform.SetParent(weaponPlaceholder);
       transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-      playerInventory.isCurrentlyEquippedMeleWeapon = true;
+      playerInventory.currentEquippedWeapon = this;
+      lastEquipTime = Time.time;
     }
+  }
+
+  public void Attack(Animator playerAnimator)
+  {
+    playerAnimator.SetTrigger("Attack");
   }
 }

@@ -1,3 +1,4 @@
+using Assets.Scripts.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,7 +6,8 @@ public class PlayerInventory : MonoBehaviour
 {
   [SerializeField] private List<GameItem> inventory = new();
   [SerializeField] private Transform weaponPlaceholder;
-  public bool isCurrentlyEquippedMeleWeapon = false;
+  public IWeapon currentEquippedWeapon;
+  public bool isCurrentlyEquippedWeapon = false;
 
   public void AddItem(GameItem item)
   {
@@ -33,6 +35,11 @@ public class PlayerInventory : MonoBehaviour
   public bool HasWeaponEquipped()
   {
     return weaponPlaceholder.childCount > 0;
+  }
+
+  public IWeapon GetEquippedWeapon()
+  {
+    return currentEquippedWeapon;
   }
 
   // DisplayInventory,
