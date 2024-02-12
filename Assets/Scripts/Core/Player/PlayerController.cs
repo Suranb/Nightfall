@@ -54,16 +54,22 @@ public class PlayerController : MonoBehaviour
   }
   private void UpdateAnimation()
   {
-    float moveVertical = Input.GetAxisRaw("Vertical");
-    float moveHorizontal = Input.GetAxisRaw("Horizontal");
+    Vector3 localVelocity = transform.InverseTransformDirection(_playerRigidbody.velocity);
 
-    bool isMoving = _playerRigidbody.velocity.magnitude > 0;
-    bool isStrafingLeft = moveHorizontal < 0;
-    bool isStrafingRight = moveHorizontal > 0;
-
-    _animator.SetBool("IsRunning", isMoving && moveVertical > 0);
-    _animator.SetBool("IsRunningBackward", isMoving && moveVertical < 0);
-    _animator.SetBool("IsStrafingLeft", isStrafingLeft);
-    _animator.SetBool("IsStrafingRight", isStrafingRight);
+    _animator.SetFloat("horizontalMovement", localVelocity.x);
+    _animator.SetFloat("verticalMovement", localVelocity.z);
   }
 }
+
+
+
+/*
+bool isMoving = _playerRigidbody.velocity.magnitude > 0;
+bool isStrafingLeft = moveHorizontal < 0;
+bool isStrafingRight = moveHorizontal > 0;
+
+_animator.SetBool("IsRunning", isMoving && moveVertical > 0);
+_animator.SetBool("IsRunningBackward", isMoving && moveVertical < 0);
+_animator.SetBool("IsStrafingLeft", isStrafingLeft);
+_animator.SetBool("IsStrafingRight", isStrafingRight);
+*/
