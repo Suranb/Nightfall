@@ -4,16 +4,16 @@ public class PlayerInteractionController : MonoBehaviour
 {
   public Transform player;
   public float interactionRange = 2.0f;
-  public PlayerInventory PlayerInventory;
+  [SerializeField] private PlayerInventory _playerInventory;
 
   void Start()
   {
-    PlayerInventory = GetComponent<PlayerInventory>();
+    _playerInventory = GetComponent<PlayerInventory>();
   }
 
   void Update()
   {
-    if (Input.GetMouseButtonDown(0)) // Left mouse button clicked
+    if (Input.GetMouseButtonDown(0))
     {
       GameObject hitObject = PerformRaycast();
       if (hitObject != null) { Debug.Log($"HitObject: {hitObject.name}"); }
@@ -34,22 +34,22 @@ public class PlayerInteractionController : MonoBehaviour
   {
     if (obj == null) return;
 
-    Item item = obj.GetComponent<Item>();
 
-    if (item != null && item.item != null && item.item.isInteractable)
+    if (obj.TryGetComponent<IInteractable>(out var interactable))
     {
-      Debug.Log("Adding GameItem to Inventory: " + item.name);
-      PlayerInventory.AddItem(item.item);
-      Destroy(obj);
+      interactable.Interact(_playerInventory);
+    }
+    else
+    {
+      Debug.Log($"{obj.name} is not interactable.");
     }
   }
 
   GameObject PerformRaycast()
   {
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    RaycastHit hit;
 
-    if (Physics.Raycast(ray, out hit))
+    if (Physics.Raycast(ray, out RaycastHit hit))
     {
       return hit.collider.gameObject;
     }

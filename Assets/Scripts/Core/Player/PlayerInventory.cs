@@ -1,9 +1,13 @@
+using Assets.Scripts.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-  [SerializeField] private List<GameItem> inventory = new List<GameItem>();
+  [SerializeField] private List<GameItem> inventory = new();
+  [SerializeField] private Transform weaponPlaceholder;
+  public IWeapon currentEquippedWeapon;
+  public bool isCurrentlyEquippedWeapon = false;
 
   public void AddItem(GameItem item)
   {
@@ -21,6 +25,21 @@ public class PlayerInventory : MonoBehaviour
       inventory.Remove(item);
       Debug.Log("Removed item: " + item.name);
     }
+  }
+
+  public Transform GetWeaponPlaceholder()
+  {
+    return weaponPlaceholder;
+  }
+
+  public bool HasWeaponEquipped()
+  {
+    return weaponPlaceholder.childCount > 0;
+  }
+
+  public IWeapon GetEquippedWeapon()
+  {
+    return currentEquippedWeapon;
   }
 
   // DisplayInventory,

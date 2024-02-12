@@ -1,15 +1,18 @@
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
   [SerializeField] private float _moveSpeed = 10.0f;
   [SerializeField] private float _rotationSpeed = 5.0f;
+
   private Rigidbody _playerRigidbody;
   private Camera _mainCamera;
   private Animator _animator;
-
+  private PlayerInventory _playerInventory;
   void Start()
   {
+    _playerInventory = GetComponent<PlayerInventory>();
     _playerRigidbody = GetComponent<Rigidbody>();
     _mainCamera = Camera.main;
     _animator = GetComponent<Animator>();
@@ -24,8 +27,15 @@ public class PlayerController : MonoBehaviour
   }
   private void HandleAttack()
   {
-    _animator.SetBool("IsAttacking", Input.GetMouseButton(0));
+    if (Input.GetMouseButton(0) && _playerInventory.currentEquippedWeapon != null)
+    {
+      if (_playerInventory.currentEquippedWeapon.CanAttack())
+      {
+        _playerInventory.currentEquippedWeapon.Attack(_animator);
+      }
+    }
   }
+
 
   private void HandleMovement()
   {
@@ -40,14 +50,13 @@ public class PlayerController : MonoBehaviour
   private void HandleRotation()
   {
     Ray cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
-    RaycastHit hit;
 
-    if (Physics.Raycast(cameraRay, out hit))
+    if (Physics.Raycast(cameraRay, out RaycastHit hit))
     {
       Vector3 pointToLook = hit.point;
       Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
 
-      Vector3 lookDirection = new Vector3(pointToLook.x, transform.position.y, pointToLook.z);
+      Vector3 lookDirection = new(pointToLook.x, transform.position.y, pointToLook.z);
       Quaternion targetRotation = Quaternion.LookRotation(lookDirection - transform.position);
       transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
     }
@@ -60,16 +69,3 @@ public class PlayerController : MonoBehaviour
     _animator.SetFloat("verticalMovement", localVelocity.z);
   }
 }
-
-
-
-/*
-bool isMoving = _playerRigidbody.velocity.magnitude > 0;
-bool isStrafingLeft = moveHorizontal < 0;
-bool isStrafingRight = moveHorizontal > 0;
-
-_animator.SetBool("IsRunning", isMoving && moveVertical > 0);
-_animator.SetBool("IsRunningBackward", isMoving && moveVertical < 0);
-_animator.SetBool("IsStrafingLeft", isStrafingLeft);
-_animator.SetBool("IsStrafingRight", isStrafingRight);
-*/
