@@ -1,8 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="TopBar" style="flex-grow: 1; width: auto; height: 0; background-color: rgb(58, 106, 106);">
-        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShowInventory" style="width: 108px; justify-content: center; align-self: center; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-left-color: rgba(25, 255, 97, 0); border-right-color: rgba(25, 255, 97, 0); border-top-color: rgba(25, 255, 97, 0); border-bottom-color: rgba(25, 255, 97, 0); background-color: rgb(188, 188, 188);" />
-    </ui:VisualElement>
-    <ui:VisualElement style="flex-grow: 1; height: 650px; background-color: rgb(94, 94, 94);">
-        <ui:VisualElement style="flex-grow: 1; background-color: rgba(255, 0, 0, 0.59); width: 580px; justify-content: center; align-self: center;" />
-    </ui:VisualElement>
-</ui:UXML>
