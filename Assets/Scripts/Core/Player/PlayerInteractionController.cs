@@ -34,9 +34,8 @@ public class PlayerInteractionController : MonoBehaviour
   {
     if (obj == null) return;
 
-    var interactable = obj.GetComponent<IInteractable>();
 
-    if (interactable != null)
+    if (obj.TryGetComponent<IInteractable>(out var interactable))
     {
       interactable.Interact(_playerInventory);
     }
@@ -49,9 +48,8 @@ public class PlayerInteractionController : MonoBehaviour
   GameObject PerformRaycast()
   {
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    RaycastHit hit;
 
-    if (Physics.Raycast(ray, out hit))
+    if (Physics.Raycast(ray, out RaycastHit hit))
     {
       return hit.collider.gameObject;
     }

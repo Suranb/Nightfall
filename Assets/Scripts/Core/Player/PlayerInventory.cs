@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-  [SerializeField] private List<GameItem> inventory = new List<GameItem>();
+  [SerializeField] private List<GameItem> inventory = new();
+  [SerializeField] private Transform weaponPlaceholder;
+  public bool isCurrentlyEquippedMeleWeapon = false;
 
   public void AddItem(GameItem item)
   {
@@ -21,6 +23,16 @@ public class PlayerInventory : MonoBehaviour
       inventory.Remove(item);
       Debug.Log("Removed item: " + item.name);
     }
+  }
+
+  public Transform GetWeaponPlaceholder()
+  {
+    return weaponPlaceholder;
+  }
+
+  public bool HasWeaponEquipped()
+  {
+    return weaponPlaceholder.childCount > 0;
   }
 
   // DisplayInventory,
