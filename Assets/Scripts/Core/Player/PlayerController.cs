@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
   private Camera _mainCamera;
   private Animator _animator;
   private PlayerInventory _playerInventory;
+
+    [SerializeField] LayerMask mask;
   void Start()
   {
     _playerInventory = GetComponent<PlayerInventory>();
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
   {
     Ray cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-    if (Physics.Raycast(cameraRay, out RaycastHit hit))
+    if (Physics.Raycast(cameraRay, out RaycastHit hit, 1000f, mask))
     {
       Vector3 pointToLook = hit.point;
       Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
