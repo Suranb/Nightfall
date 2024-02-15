@@ -32,7 +32,7 @@ public class TopDownCamera : MonoBehaviour
     Vector3 worldPos = (Vector3.forward * -distance) + (Vector3.up * height);
     Vector3 rotatedVector = Quaternion.AngleAxis(angle, Vector3.up) * worldPos;
     Vector3 flatTargetPosition = target.position;
-    flatTargetPosition.y = 0f; // Keep the camera's target at the same y-level as the target
+    //flatTargetPosition.y = 0f; // Keep the camera's target at the same y-level as the target
     Vector3 finalPosition = flatTargetPosition + rotatedVector;
 
     transform.position = Vector3.SmoothDamp(transform.position, finalPosition, ref refVelocity, smoothSpeed);
